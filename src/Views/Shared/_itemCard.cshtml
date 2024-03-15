@@ -1,0 +1,29 @@
+@model Wish.Models.WishListItem
+
+
+<div class="col">
+	<div class="card  shadow-lg bg-dark text-light">
+		<div class="card-container">
+			<img src="@Model.ImageURL" class="img-bottom card-img-blur " >
+			<img src="@Model.ImageURL" class="img-top card-img-top" >
+		</div>
+		<div class="card-body">
+			<h3 class="card-title text-center">
+				<a asp-controller="WishListItems" asp-action="Details" asp-route-id="@Model.Id">
+					@Model.Name
+				</a>
+				<a asp-controller="WishListItems" asp-action="Edit" asp-route-id="@Model.Id">
+					<span class="oi oi-pencil" title="pencil" aria-hidden="true"></span>
+				</a>
+				<a asp-controller="WishListItems" asp-action="Delete" asp-route-id="@Model.Id"><span class="oi oi-x"
+						title="x" aria-hidden="true"></span></a>
+			</h3>
+		</div>
+		<div class="card-footer user-select-none">
+			Added: @Model.Acquired.ToString("dd MMM yyyy hh:mm")
+			<div class="float-end">
+				LOL
+			</div>
+		</div>
+	</div>
+</div>

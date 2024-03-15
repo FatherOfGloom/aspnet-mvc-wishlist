@@ -1,0 +1,11 @@
+obj/
+bin/
+Properties/
+Migrations/
+wwwroot/
+Wish.sln
+appsettings.json
+appsettings.Development.json
+Wish.csproj.user
+ScaffoldingReadMe.txt
+.vs/

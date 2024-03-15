@@ -1,0 +1,47 @@
+@model Wish.Models.WishListItem
+
+@{
+	ViewData["Title"] = "Details";
+	var detailsHeaders = Model.DescriptionHeaders?.ToArray() ?? new string[] { };
+	var detailsBodies = Model.DescriptionBodies?.ToArray() ?? new string[] { };
+	var tableRowCount = Math.Min(detailsHeaders.Count(), detailsBodies.Count());
+}
+
+<br />
+<div>
+	<div class="container text-center">
+		<div class="row align-items-center">
+			<h1 class="title-text">@Html.DisplayFor(model => model.Name)</h1>
+
+		</div>
+		<br />
+	</div>
+	<div class="row">
+		<span class="col-sm-6">
+			<img src="@Model.ImageURL" class="" />
+		</span>
+		<dl class="col-sm-6">
+			<div class="row text-center">
+				<h4>Details 📋</h4>
+			</div>
+			<div class="row align-items-center text-center">
+				<table class="styled-table">
+					<tbody>
+						@for (int i = 0; i < tableRowCount; ++i)
+						{
+							<tr>
+								<td>@detailsHeaders[i]</td>
+								<td>@detailsBodies[i]</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</dl>
+	</div>
+	<hr />
+	<div>
+		<a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success">Edit</a> &nbsp;
+		<a asp-action="Index" class="btn btn-success">Back to List</a>
+	</div>
+</div>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Wish.Models.WishListItem>
+
+@{
+    ViewData["Title"] = "Wish";
+}
+
+<br />
+<div class="text-center">
+    <h1 class="display-1 title-text">✨My wishlist✨</h1>
+    <br />
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var item in Model)
+    {
+        <partial name="_itemCard" model="item" />
+    }
+    <div class="col">
+        <div class="card h-100 shadow-lg mb-5 rounded bg-transparent text-light">
+            <div class="card-body text-center">
+                <h1>
+                    <a asp-controller="WishListItems" asp-action="Create" 
+                        class="btn btn-outline-success btn-lg">
+                        <span class="oi oi-plus" aria-hidden="true"></span>
+                    </a>
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>

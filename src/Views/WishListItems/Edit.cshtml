@@ -1,0 +1,80 @@
+@model Wish.Models.WishListItem
+@{
+    ViewData["Title"] = "Edit";
+    string[] detailsHeaders = Model.DescriptionHeaders?.ToArray() ?? new string[] { "" };
+    string[] detailsBodies = Model.DescriptionBodies?.ToArray() ?? new string[] { "" };
+    var tableRowCount = Math.Min(detailsHeaders.Count(), detailsBodies.Count());
+}
+
+<h1></h1>
+
+<br />
+<div>
+    <div class="container text-center">
+        <div class="row align-items-center">
+            <h1 class="title-text">📚@Html.DisplayFor(model => model.Name)📖</h1>
+        </div>
+        <br />
+    </div>
+</div>
+<div class="row  justify-content-center text-center">
+    <div class="col-sm-5">
+        <div class="row">
+            <img src="@Model.ImageURL" class="" />
+            &nbsp;
+        </div>
+        <form asp-action="Edit">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="ImageURL" />
+                <input type="hidden" asp-for="Acquired" />
+                <input type="hidden" asp-for="OwnerID" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label h2"></label>
+                    <input asp-for="Name" class="form-control mx-auto w-50 p3"/>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <table class="center table-stretch">
+                    <thead>
+                        <h2>Details</h2>
+                    </thead>
+                    <tbody id="item-list">
+                        @for (int i = 0; i < tableRowCount; ++i)
+                        {
+                            <tr>
+                                <td>
+                                    <input asp-for="DescriptionHeaders[i]" class="form-control headers" />
+                                </td>
+                                <td>
+                                    <input asp-for="DescriptionBodies[i]" class="form-control bodies" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    
+                </table>
+            </div>            
+            <br />
+            <div class="row">
+                <div class="form-group">
+                    <a href="#" id="add" class="btn btn-outline-success"><span class="oi oi-plus" aria-hidden="true"></span></a>
+                </div>
+                &nbsp;
+                <div class="form-group mx-auto">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                    &nbsp;
+                    <a asp-action="Index" class="btn btn-danger">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
